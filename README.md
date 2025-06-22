@@ -7,3 +7,9 @@ You can install them by typing commands below.
 winget install avr-gcc
 winget install make -s winget
 ```
+
+## Linux
+
+```
+not yet available
+```
