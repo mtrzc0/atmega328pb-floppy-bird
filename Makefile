@@ -1,5 +1,5 @@
 # === User Configuration ===
-MCU = atmega328p             # Change to match your MCU
+MCU = atmega328pb            # Change to match your MCU
 F_CPU = 16000000UL           # CPU frequency for compilation
 BAUD = 9600                  # Optional: used in your code
 PROGRAMMER = usbasp          # Programmer type
