@@ -6,8 +6,10 @@ PROGRAMMER = usbasp          # Programmer type
 PORT = /dev/ttyUSB0          # Not used by all programmers
 
 # === Project Files ===
-TARGET = main                # Output file (no extension)
-SRC = main.c                 # Add more .c files separated by spaces
+TARGET = build/main                # Output file (no extension)
+TARGET_ELF = build/main.elf        # Output file
+TARGET_HEX = build/main.hex        # Output file
+SRC = main.c keyboard_driver.c     # Add more .c files separated by spaces
 
 # === Toolchain ===
 CC = avr-gcc
@@ -16,16 +18,16 @@ CFLAGS = -mmcu=$(MCU) -DF_CPU=$(F_CPU) -Os -Wall
 LDFLAGS = -mmcu=$(MCU)
 
 # === Build Targets ===
-all: $(TARGET).hex
+all: $(TARGET_HEX)
 
-$(TARGET).elf: $(SRC)
+$(TARGET_ELF): $(SRC)
 	$(CC) $(CFLAGS) $(SRC) -o $@
 
-$(TARGET).hex: $(TARGET).elf
+$(TARGET_HEX): $(TARGET_ELF)
 	$(OBJCOPY) -O ihex -R .eeprom $< $@
 
-flash: $(TARGET).hex
-	avrdude -c $(PROGRAMMER) -p $(MCU) -U flash:w:$(TARGET).hex
+flash: $(TARGET_HEX)
+	avrdude -c $(PROGRAMMER) -p $(MCU) -U flash:w:$(TARGET_HEX)
 
 clean:
-	rm -f *.o *.elf *.hex
+	rm build/*
