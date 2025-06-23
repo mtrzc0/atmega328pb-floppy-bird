@@ -2,7 +2,7 @@
 MCU = atmega328pb            # Change to match your MCU
 F_CPU = 16000000UL           # CPU frequency for compilation
 BAUD = 9600                  # Optional: used in your code
-PROGRAMMER = xplainedmini          # Programmer type
+PROGRAMMER = xplainedmini    # Programmer type
 PORT = COM4          		 # Not used by all programmers
 
 # === Project Files ===

@@ -1,7 +1,9 @@
 #include <avr/io.h>
 
+#include "keyboard_driver.h"
+
 int main(void) 
 {
-    DDRB=0xFF;
-    PORTB=0b00001010;
+    keyboardRead();
+    while(1){}
 }
