@@ -3,6 +3,6 @@
 int main(void) 
 {
     keyboardInit();
-    keyboardRead();
-    while(1);
+    uint8_t clickedBtn=0;
+    keyboardRead(&clickedBtn);
 }

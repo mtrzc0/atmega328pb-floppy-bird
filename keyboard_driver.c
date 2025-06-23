@@ -1,4 +1,5 @@
 #include "keyboard_driver.h"
+#include "macro.h"
 
 /*
     KEYBORAD MATRIX LAYOUT
@@ -13,15 +14,15 @@
     +---+---+---+---+
 
     CONNECTIONS
-    COL1...4 -> PORTB.0...PORTB.3
-    ROW1 -> PORTD.0
+    COL1...4 -> PORTC.0...PORTC.3
+    ROW1..2 -> PORTC.4...PORTC.5
 
     FUNCTIONS
     keyboardInit() -> Set ISR
     keyboardRead() -> The number of clicked button
  */
 
- static uint8_t keyboardBtnId = 0;
+volatile static uint8_t keyboardBtnId = 0;
 
 ISR(PCINT1_vect)
 {
@@ -44,12 +45,12 @@ ISR(PCINT1_vect)
     //read portc rows in high nibble
     rows=PINC&(0xf0);
     
-    //store button position
+    //store clicked button position
     keyboardBtnId=rows|cols;
-    PORTB=keyboardBtnId;
 
     //restore rows pcint as interrupt triggers
     PCMSK1=(1<<4)|(1<<5);
+    reti();
 }
 
 void keyboardInit(void)
@@ -67,7 +68,8 @@ void keyboardInit(void)
     sei();
 }
 
-uint8_t keyboardRead(void)
+void keyboardRead(uint8_t *var)
 {
-    return keyboardBtnId;
+    *var = keyboardBtnId;
+    PORTB=keyboardBtnId;
 }

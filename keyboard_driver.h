@@ -4,7 +4,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 
-uint8_t keyboardRead(void);
 void keyboardInit(void);
+void keyboardRead(uint8_t *var);
 
 #endif
