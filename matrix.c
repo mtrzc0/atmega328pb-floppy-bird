@@ -1,6 +1,5 @@
-#include "matrix.h" // mogę robić macierze jej
-#include <avr/io.h> // zaprawa
-#include <avr/interrupt.h> // przerwania
+#include "matrix.h" 
+
 
 /*
 Tutaj pinout jeba**** leda 8x8

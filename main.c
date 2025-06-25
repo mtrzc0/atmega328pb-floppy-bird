@@ -1,6 +1,5 @@
-#include <stdint.h>
 #include "matrix.h"
-#include <util/delay.h>
+
 
 int main(void) {
     matrix_init();
